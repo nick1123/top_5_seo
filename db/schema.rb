@@ -19,12 +19,14 @@ ActiveRecord::Schema.define(version: 20140808204105) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.string   "url"
+    t.string   "host"
     t.integer  "category"
-    t.integer  "clicks"
-    t.integer  "votes_up"
-    t.integer  "votes_down"
-    t.integer  "points"
+    t.integer  "clicks",              default: 0
+    t.integer  "votes_up",            default: 0
+    t.integer  "votes_down",          default: 0
+    t.integer  "points",              default: 0
     t.text     "voting_ip_addresses"
+    t.date     "on_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

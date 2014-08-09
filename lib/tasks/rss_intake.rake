@@ -1,16 +1,28 @@
+require 'uri'
 require 'feedjira'
 
 desc "RSS Intake"
 task :rss_intake => :environment do
   urls = IO.readlines("lib/flat_files/rss_feeds.txt")
-  urls.shuffle.each do |url|
+  urls[0..1].shuffle.each do |url|
     begin
     next if url.blank?
     url.strip!
     items = process_feed(url)
     puts items.inspect
+    items.each do |item|
+      Post.create(
+        title:    item[:title],
+        url:      item[:url],
+        host:     URI.parse(item[:url]).host.gsub('www.', ''),
+        category: Post::CATEGORY_SEO,
+        on_date:  Date.today
+      )
+    end
     puts ''
     rescue Exception => e
+      puts e
+      puts e.backtrace
     end
   end
 end
