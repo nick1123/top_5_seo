@@ -19,11 +19,18 @@ ActiveRecord::Schema.define(version: 20140808204105) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.string   "url"
+    t.integer  "category"
     t.integer  "clicks"
-    t.integer  "votes"
+    t.integer  "votes_up"
+    t.integer  "votes_down"
     t.integer  "points"
+    t.text     "voting_ip_addresses"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "posts", ["category", "url"], name: "index_posts_on_category_and_url", unique: true, using: :btree
+  add_index "posts", ["created_at"], name: "index_posts_on_created_at", using: :btree
+  add_index "posts", ["points"], name: "index_posts_on_points", using: :btree
 
 end
