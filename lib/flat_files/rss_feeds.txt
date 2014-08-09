@@ -40,7 +40,6 @@ http://feeds.feedburner.com/Unbounce
 http://feeds.feedburner.com/unicornfree
 http://feeds.feedburner.com/viperchill
 http://feeds.feedburner.com/WeBlogBetter
-http://feeds.feedburner.com/wp-clicknewz
 http://feeds.outspokenmedia.com/outspokenmedia
 http://feeds.searchengineland.com/searchengineland
 http://feeds.seo.com/seocom
