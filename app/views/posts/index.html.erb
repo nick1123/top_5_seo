@@ -1,0 +1,8 @@
+<ol>
+  <% @posts.each do |post| %>
+    <li>
+      <a href="<%= post.url %>" target="_blank"><%= post.title %></a>
+      <span id="domain">(<a href="/?pid=<%= post.id %>"><%= post.host %></a>)</span>
+    </li>
+  <% end %>
+</ol>
