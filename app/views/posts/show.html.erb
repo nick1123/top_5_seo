@@ -1,0 +1,37 @@
+<%- model_class = Post -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @post.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:url) %>:</strong></dt>
+  <dd><%= @post.url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:host) %>:</strong></dt>
+  <dd><%= @post.host %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
+  <dd><%= @post.category %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:clicks) %>:</strong></dt>
+  <dd><%= @post.clicks %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:votes_up) %>:</strong></dt>
+  <dd><%= @post.votes_up %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:votes_down) %>:</strong></dt>
+  <dd><%= @post.votes_down %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:points) %>:</strong></dt>
+  <dd><%= @post.points %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:voting_ip_addresses) %>:</strong></dt>
+  <dd><%= @post.voting_ip_addresses %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:on_date) %>:</strong></dt>
+  <dd><%= @post.on_date %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              posts_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_post_path(@post), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              post_path(@post),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

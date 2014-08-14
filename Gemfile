@@ -27,6 +27,12 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'rack-cors', :require => 'rack/cors'
 
+# Bootstrap styling
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+
+
 gem 'unicorn'
 
 # bundle exec rake doc:rails generates the API under doc/api.
