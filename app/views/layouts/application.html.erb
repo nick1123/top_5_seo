@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stuff</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <title>Top SEO News</title>
+  <%= stylesheet_link_tag "bootstrap" %>
+  <%= stylesheet_link_tag "styles" %>
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
+    
 </head>
 <body>
+  
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/"></a>
+      <div class="nav-collapse">
+        <ul class="nav">
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
 
-<%= yield %>
 
+  <div class="container">
+          <h3>Top SEO News</h3>
+      <%= yield %>
+
+
+
+    <hr>
+
+    <footer>
+      <p>&copy; Top SEO News 2014</p>
+    </footer>
+
+  </div>
 </body>
 </html>
