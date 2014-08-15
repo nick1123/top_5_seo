@@ -5,3 +5,7 @@ development:
 test:
   adapter: postgresql
   database: top_seo_test
+
+production:
+  adapter: postgresql
+  database: top_seo_production
