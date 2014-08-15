@@ -38,9 +38,6 @@ task :rss_intake => :environment do
       puts e.backtrace
     end
   end
-
-  puts "Sleeping for #{sleep_seconds} seconds"
-  sleep(sleep_seconds)
 end
 
 def calculate_points(title)
