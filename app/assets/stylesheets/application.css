@@ -19,5 +19,16 @@
 .domain, .domain a
 {
   font-size: 0.8em;
-  color: #ccc;
+  color: #999;
+}
+
+.post_box
+{
+  padding-bottom: 1em;
+}
+
+.info_line
+{
+  font-size: 0.8em;
+  color: #999;
 }

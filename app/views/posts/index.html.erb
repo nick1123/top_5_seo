@@ -1,12 +1,16 @@
-<%- model_class = Post -%>
 <div class="page-header">
   <h1>Top SEO News</h1>
 </div>
 <ol>
   <% @posts.each do |post| %>
-    <li>
+    <li class="post_box">
       <a href="<%= post.url =%>"><%= post.title %></a>
       <span class="domain">(<%= post.host %>)</span>
+      <div class="info_line">
+        <%= post.points %> Points
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Submitted <%= distance_of_time_in_words(post.created_at, Time.now) %> ago
+      </div>
     </li>
   <% end %>
 </ol>
