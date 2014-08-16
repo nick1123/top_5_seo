@@ -22,9 +22,14 @@
   color: #999;
 }
 
-.post_box
+.post_box, .post_box_grey
 {
-  padding-bottom: 1em;
+  padding: 1em;
+}
+
+.post_box_grey
+{
+  background-color: #ccc;
 }
 
 .info_line

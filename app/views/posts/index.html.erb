@@ -3,7 +3,8 @@
 </div>
 <ol>
   <% @posts.each do |post| %>
-    <li class="post_box">
+    <% li_class = (post.points > 0 ? 'post_box' : 'post_box_grey') %>
+    <li class="<%= li_class %>">
       <a href="<%= post.url =%>"><%= post.title %></a>
       <span class="domain">(<%= post.host %>)</span>
       <div class="info_line">
