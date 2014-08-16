@@ -6,37 +6,42 @@ task :rss_intake => :environment do
   sleep_seconds = 3_600
   category = Post::CATEGORY_SEO
 
-  urls = IO.readlines("lib/flat_files/rss_feeds.txt")
-  urls.shuffle.each do |url|
-    begin
-      next if url.blank?
-      url.strip!
-      puts "Processing feed: #{url}"
+  while true do
+    urls = IO.readlines("lib/flat_files/rss_feeds.txt")
+    urls.shuffle.each do |url|
+      begin
+        next if url.blank?
+        url.strip!
+        puts "Processing feed: #{url}"
 
-      items = process_feed(url)
-      items.each do |item|
-        post_url = item[:url]
-        next if Post.where(url: post_url, category: category).count > 0
+        items = process_feed(url)
+        items.each do |item|
+          post_url = item[:url]
+          next if Post.where(url: post_url, category: category).count > 0
 
-        title = item[:title]
-        points = calculate_points(title)
+          title = item[:title]
+          points = calculate_points(title)
 
-        host = URI.parse(post_url).host.gsub('www.', '')
-        Post.create(
-          title:    item[:title],
-          url:      post_url,
-          host:     host,
-          category: category,
-          on_date:  Date.today,
-          points:   points
-        )
+          host = URI.parse(post_url).host.gsub('www.', '')
+          Post.create(
+            title:    title,
+            url:      post_url,
+            host:     host,
+            category: category,
+            on_date:  Date.today,
+            points:   points
+          )
 
-        puts "  #{points} Points for #{post_url}"
+          puts "  #{points} Points for #{title}"
+        end
+      rescue Exception => e
+        puts e
+        puts e.backtrace
       end
-    rescue Exception => e
-      puts e
-      puts e.backtrace
     end
+
+    puts "Sleeping for #{sleep_seconds} seconds"
+    sleep(sleep_seconds)
   end
 end
 
