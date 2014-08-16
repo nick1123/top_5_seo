@@ -1,19 +1,22 @@
 <div class="page-header">
   <h1>Top SEO News</h1>
 </div>
-<ol>
-  <% @posts.each do |post| %>
-    <% li_class = (post.points > 0 ? 'post_box' : 'post_box_grey') %>
-    <li class="<%= li_class %>">
-      <a href="/url_redirect?post_id=<%= post.id %>" target="_blank"><%= post.title %></a>
-      <span class="domain">(<%= post.host %>)</span>
-      <div class="info_line">
-        <%= post.points %> Points
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <%= post.clicks %> Clicks
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        Submitted <%= distance_of_time_in_words(post.created_at, Time.now) %> ago
-      </div>
-    </li>
-  <% end %>
-</ol>
+<% @week.each do |day_display, posts| %>
+  <h3><%= day_display %></h3>
+  <ol>
+    <% posts.each do |post| %>
+      <% li_class = (post.points > 0 ? 'post_box' : 'post_box_grey') %>
+      <li class="<%= li_class %>">
+        <a href="/url_redirect?post_id=<%= post.id %>" target="_blank"><%= post.title %></a>
+        <span class="domain">(<%= post.host %>)</span>
+        <div class="info_line">
+          <%= post.points %> Points
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= post.clicks %> Clicks
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          Submitted <%= distance_of_time_in_words(post.created_at, Time.now) %> ago
+        </div>
+      </li>
+    <% end %>
+  </ol>
+<% end %>
