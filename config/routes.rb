@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'posts#index'
   resources :posts
 
+  get '/url_redirect' => 'posts#url_redirect'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
