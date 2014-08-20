@@ -23,6 +23,16 @@ class Post < ActiveRecord::Base
     self.save
   end
 
+  def vote_down(remote_ip)
+    self.votes_down += 1
+    if !voted_before?(remote_ip)
+      record_vote_ip(remote_ip)
+      self.points -= POINTS_PER_VOTE
+    end
+
+    self.save
+  end
+
   def voted_before?(remote_ip)
     self.voting_ip_addresses.to_s.include?(remote_ip)
   end

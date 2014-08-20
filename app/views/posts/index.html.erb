@@ -12,7 +12,11 @@
         <div class="info_line">
           <a href="/vote_up?post_id=<%= post.id %>">Vote Up</a>
           &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="/vote_down?post_id=<%= post.id %>">Vote Down</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <%= post.votes_up %> Votes Up
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= post.votes_down %> Votes Down
           &nbsp;&nbsp;&nbsp;&nbsp;
           <%= post.points %> Points
           &nbsp;&nbsp;&nbsp;&nbsp;

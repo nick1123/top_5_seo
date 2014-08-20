@@ -22,6 +22,12 @@ class PostsController < ApplicationController
     redirect_to :root
   end
 
+  def vote_down
+    post = Post.find(params[:post_id])
+    post.vote_down(request.remote_ip)
+    redirect_to :root
+  end
+
   private
 
   def get_posts_for_day(day, min_points)
