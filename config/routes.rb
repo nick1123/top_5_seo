@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :posts
 
   get '/url_redirect' => 'posts#url_redirect'
+  get '/vote_up'      => 'posts#vote_up'
+  get '/vote_down'    => 'posts#vote_down'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

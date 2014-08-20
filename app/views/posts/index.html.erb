@@ -10,6 +10,10 @@
         <a href="/url_redirect?post_id=<%= post.id %>" target="_blank"><%= post.title %></a>
         <span class="domain">(<%= post.host %>)</span>
         <div class="info_line">
+          <a href="/vote_up?post_id=<%= post.id %>">Vote Up</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= post.votes_up %> Votes Up
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <%= post.points %> Points
           &nbsp;&nbsp;&nbsp;&nbsp;
           <%= post.clicks %> Clicks
