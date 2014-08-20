@@ -46,9 +46,10 @@ task :rss_intake => :environment do
 end
 
 def calculate_points(title)
+  title_modified = ' ' + title.downcase.gsub('linkedin', '') + ' '
   points = 0
   ['seo', 'link', 'panda', 'penguin', 'rank', 'serp'].each do |word|
-    points += 1 if title.downcase.include?(word)
+    points += 1 if title_modified.include?(word)
   end
 
   points = 1 if points > 1
