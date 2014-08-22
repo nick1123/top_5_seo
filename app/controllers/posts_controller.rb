@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    min_points = (params[:all].present? ? -999999 : 1)
+    min_points = (params[:nick].present? ? -999999 : 1)
     @week = {}
     @week["Last 24 Hours"] = Post.where("points >= #{min_points}").where(created_at: (24.hours.ago..Time.now)).order("points DESC, created_at DESC")
     (1..6).each do |days_back|
