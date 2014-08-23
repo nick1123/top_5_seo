@@ -11,29 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819145525) do
+ActiveRecord::Schema.define(version: 20140808204105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "category_posts", force: true do |t|
+    t.integer  "post_id",                          null: false
+    t.string   "category",                         null: false
+    t.date     "on_date",                          null: false
+    t.integer  "clicks",              default: 0
+    t.integer  "votes_up",            default: 0
+    t.integer  "votes_down",          default: 0
+    t.integer  "points",              default: 0
+    t.text     "voting_ip_addresses", default: ""
+    t.text     "click_ip_addresses",  default: ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "category_posts", ["category", "post_id"], name: "index_category_posts_on_category_and_post_id", unique: true, using: :btree
+  add_index "category_posts", ["category"], name: "index_category_posts_on_category", using: :btree
+  add_index "category_posts", ["on_date"], name: "index_category_posts_on_on_date", using: :btree
+  add_index "category_posts", ["points"], name: "index_category_posts_on_points", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title"
     t.string   "url"
     t.string   "host"
-    t.integer  "category"
-    t.integer  "clicks",              default: 0
-    t.integer  "votes_up",            default: 0
-    t.integer  "votes_down",          default: 0
-    t.integer  "points",              default: 0
-    t.text     "voting_ip_addresses"
     t.date     "on_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "click_ip_addresses"
   end
 
-  add_index "posts", ["category", "url"], name: "index_posts_on_category_and_url", unique: true, using: :btree
-  add_index "posts", ["created_at"], name: "index_posts_on_created_at", using: :btree
-  add_index "posts", ["points"], name: "index_posts_on_points", using: :btree
+  add_index "posts", ["url"], name: "index_posts_on_url", unique: true, using: :btree
 
 end

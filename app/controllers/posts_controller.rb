@@ -1,36 +1,33 @@
 class PostsController < ApplicationController
   def index
-    min_points = (params[:nick].present? ? -999999 : 1)
+    category = params[:category] || Category::SEO
+    @title = Category::CATEGORY_INFO[category][:title]
     @week = {}
-    @week["Last 24 Hours"] = Post.where("points >= #{min_points}").where(created_at: (24.hours.ago..Time.now)).order("points DESC, created_at DESC")
+    @week["Last 24 Hours"] = CategoryPost.includes(:post).where(category: category).where(created_at: (24.hours.ago..Time.now)).order("points DESC, created_at DESC")
     (1..6).each do |days_back|
       day = Date.current - days_back
       day_display = day.strftime("%A %B %-d, %Y")
-      @week[day_display] = get_posts_for_day(day, min_points)
+      category_posts = CategoryPost.includes(:post).where(category: category).where(on_date: day).order("points DESC, created_at DESC")
+      @week[day_display] = category_posts if category_posts.count > 0
     end
   end
 
   def url_redirect
-    post = Post.find(params[:post_id])
-    post.increment_clicks(request.remote_ip)
-    redirect_to post.url
+    cp = CategoryPost.find(params[:cp_id])
+    cp.increment_clicks(request.remote_ip)
+    redirect_to cp.post.url
   end
 
   def vote_up
-    post = Post.find(params[:post_id])
-    post.vote_up(request.remote_ip)
+    cp = CategoryPost.find(params[:cp_id])
+    cp.vote_up(request.remote_ip)
     redirect_to :root
   end
 
   def vote_down
-    post = Post.find(params[:post_id])
-    post.vote_down(request.remote_ip)
+    cp = CategoryPost.find(params[:cp_id])
+    cp.vote_down(request.remote_ip)
     redirect_to :root
   end
-
-  private
-
-  def get_posts_for_day(day, min_points)
-    Post.where("points >= #{min_points}").where(on_date: day).order("points DESC, created_at DESC")
-  end
 end
+

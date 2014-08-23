@@ -1,28 +1,36 @@
-<div class="page-header">
-  <h1>Top SEO News</h1>
+<div>News about: 
+<% Category::CATEGORY_INFO.each do |category, details| %>
+  <a href="/?category=<%= category %>"><%= details[:title] %></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+<% end %>
 </div>
-<% @week.each do |day_display, posts| %>
+
+<div class="page-header">
+  <h1><%= @title %> News</h1>
+</div>
+
+<% @week.each do |day_display, category_posts| %>
   <h3><%= day_display %></h3>
   <ol>
-    <% posts.each do |post| %>
-      <% li_class = (post.points > 0 ? 'post_box' : 'post_box_grey') %>
+    <% category_posts.each do |cp| %>
+      <% li_class = (cp.points >= 0 ? 'post_box' : 'post_box_grey') %>
       <li class="<%= li_class %>">
-        <a href="/url_redirect?post_id=<%= post.id %>" target="_blank"><%= post.title %></a>
-        <span class="domain">(<%= post.host %>)</span>
+        <a href="/url_redirect?cp_id=<%= cp.id %>" target="_blank"><%= cp.post.title %></a>
+        <span class="domain">(<%= cp.post.host %>)</span>
         <div class="info_line">
-          <a href="/vote_up?post_id=<%= post.id %>">Vote Up</a>
+          <a href="/vote_up?cp_id=<%= cp.id %>">Vote Up</a>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="/vote_down?post_id=<%= post.id %>">Vote Down</a>
+          <a href="/vote_down?cp_id=<%= cp.id %>">Vote Down</a>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= post.votes_up %> Votes Up
+          <%= cp.votes_up %> Votes Up
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= post.votes_down %> Votes Down
+          <%= cp.votes_down %> Votes Down
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= post.points %> Points
+          <%= cp.points %> Points
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= post.clicks %> Clicks
+          <%= cp.clicks %> Clicks
           &nbsp;&nbsp;&nbsp;&nbsp;
-          Submitted <%= distance_of_time_in_words(post.created_at, Time.now) %> ago
+          Submitted <%= distance_of_time_in_words(cp.post.created_at, Time.now) %> ago
         </div>
       </li>
     <% end %>
