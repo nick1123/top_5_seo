@@ -7,7 +7,7 @@ task :rss_intake => :environment do
 
   while true do
     urls = IO.readlines("lib/flat_files/rss_feeds.txt")
-    urls.each do |url|
+    urls.shuffle.each do |url|
       begin
         next if url.blank?
         url.strip!
